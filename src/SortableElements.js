@@ -7,7 +7,7 @@ import React, {Component} from 'react';
  * @param {function} renderItem Callback function to render item element from data item
  * @param {function} onChange Callback function called with newly ordered data
  **/
-export default class SortableElements extends Component {
+export default class SortableItems extends Component {
 
 	constructor( props ) {
 		super( props );
@@ -24,13 +24,11 @@ export default class SortableElements extends Component {
 	}
 
 	sortData( from, to ) {
-		let {data} = this.state;
+		let data = [...this.state.data];
 
-		data.splice( to, 0, data.splice( from, 1 )[0] );
-		let {onChange} = this.props;
-		if ( ! onChange ) {
-			onChange = items => null;
-		}
+		data.splice(to, 0, data.splice( from, 1 )[0] );
+
+		let onChange = this.props.onChange || (items => null);
 
 		onChange( data );
 
@@ -54,13 +52,12 @@ export default class SortableElements extends Component {
 	dragEnd( e ) {
 		this.dragged.style.display = 'block';
 		this.dragged.parentNode.removeChild( this.state.placeholder );
-		let from = Number( this.dragged.dataset.id );
-		let to = Number( this.over.dataset.id );
+		let from = Number( this.dragged.dataset.ind );
+		let to = Number( this.over.dataset.ind );
 		if ( from < to ) to --;
 		if ( this.nodePlacement == 'after' ) to ++;
 
 		this.sortData( from, to );
-
 	}
 
 	/**
@@ -98,6 +95,7 @@ export default class SortableElements extends Component {
 			onDragEnd  : this.dragEnd,
 			onDragStart: this.dragStart,
 			className  : 'sortable-items--item',
+			'data-ind'  : i,
 			...(this.props.itemProps || {})
 		};
 
