@@ -39,3 +39,23 @@ test( 'SortableItems renders the correct elements', () => {
 	expect( wrapper.children( '.sortable-items--item' ).length ).toEqual( colors.length );
 	expect( wrapper.children( '.sortable-items--item' ).first().prop( 'draggable' ) ).toEqual( 'true' );
 } );
+
+test( 'SortableItems wrapProps className', () => {
+	let colors = ['Red', 'Green', 'Blue', 'Yellow', 'Black', 'White', 'Orange'];
+
+	const wrapper = shallow(
+		<SortableItems data={colors} wrapProps={{className: 'my-sortable-stuff',}}/>
+	);
+
+	expect( wrapper.hasClass( 'my-sortable-stuff' ) ).toEqual( true );
+} );
+
+test( 'SortableItems itemProps className', () => {
+	let colors = ['Red', 'Green', 'Blue', 'Yellow', 'Black', 'White', 'Orange'];
+
+	const wrapper = shallow(
+		<SortableItems data={colors} itemProps={{className: 'my-sortable-items',}}/>
+	);
+
+	expect( wrapper.children( '.my-sortable-items' ).length ).toEqual( colors.length );
+} );
