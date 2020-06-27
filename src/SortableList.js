@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
 
 /**
  * Sortable List module
@@ -73,33 +72,8 @@ export default class SortableList extends Component {
       )
     })
 
-    return (
-      <SortableWrapper>
-        <ul onDragOver={this.dragOver.bind(this)}>{listItems}</ul>
-      </SortableWrapper>
-    )
-  }
+
+
+		return <div onDragOver={this.dragOver.bind( this )}>{listItems}</div>;
+	}
 }
-
-const SortableWrapper = styled.div`
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  ul li {
-    background: #eee;
-    color: #666;
-    margin: 0;
-    padding: 10px;
-    line-height: 1;
-    .placeholder {
-      background: #03cc85;
-    }
-    .placeholder:before {
-      content: 'Drop here';
-      color: #666;
-    }
-  }
-`
