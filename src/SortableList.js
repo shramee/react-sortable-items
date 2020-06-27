@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 /**
  * Sortable List module
  * A sortable list component using html5 drag and drop api.
+ * @param {array} data Array of data to resort
+ * @param {function} renderItem Callback function to render item element from data item
  **/
 export default class SortableList extends Component {
   constructor(props) {
@@ -56,23 +58,27 @@ export default class SortableList extends Component {
     }
   }
 
-  render() {
-    const { data } = this.state
-    const listItems = data.map((item, i) => {
-      return (
-        <li
-          data-id={i}
-          key={i}
-          draggable="true"
-          onDragEnd={this.dragEnd.bind(this)}
-          onDragStart={this.dragStart.bind(this)}
-        >
-          {item}
-        </li>
-      )
-    })
+	renderItem( item, i ) {
+		let {renderItem} = this.props;
 
+		if ( ! renderItem ) {
+			renderItem = item => item;
+		}
 
+		return <div
+			data-id={i}
+			key={i}
+			draggable="true"
+			onDragEnd={this.dragEnd.bind( this )}
+			onDragStart={this.dragStart.bind( this )}
+		>
+			{renderItem( item )}
+		</div>;
+	}
+
+	render() {
+		const {data} = this.state;
+		const listItems = data.map( ( item, i ) => this.renderItem( item, i ) );
 
 		return <div onDragOver={this.dragOver.bind( this )}>{listItems}</div>;
 	}
