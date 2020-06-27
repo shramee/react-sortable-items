@@ -1,13 +1,13 @@
 {
-  "name": "react-sortable-list",
+  "name": "react-sortable-items",
   "version": "1.1.1",
-  "description": "A sortable list component using html5 drag and drop api",
-  "main": "lib/SortableList.js",
+  "description": "A minimalistic sortable input-like component.",
+  "main": "lib/SortableItems.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/StevenIseki/react-sortable-list.git"
+    "url": "https://github.com/shramee/react-sortable-items.git"
   },
-  "author": "Steven Iseki <stevenisekimartin@gmail.com>",
+  "author": "Shramee <shramee.srivastav@gmail.com>",
   "license": "MIT",
   "peerDependencies": {
     "react": "^16.0.0"

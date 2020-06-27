@@ -1,4 +1,4 @@
-import SortableList from '../lib/SortableList' // 'react-sortable-list'
+import SortableItems from '../lib/SortableItems' // 'react-sortable-items'
 import ReactDOM from 'react-dom'
 import React, { Component } from 'react'
 
@@ -8,7 +8,7 @@ class TestComponent extends Component {
 
     return (
       <div>
-        <SortableList data={colors} />
+        <SortableItems data={colors} />
       </div>
     )
   }

@@ -1,19 +1,19 @@
-# react-sortable-list
+# react-sortable-items
 
-[![npm version](https://badge.fury.io/js/react-sortable-list.svg)](https://badge.fury.io/js/react-sortable-list)
+[![npm version](https://badge.fury.io/js/react-sortable-items.svg)](https://badge.fury.io/js/react-sortable-items)
 
-![](https://raw.githubusercontent.com/StevenIseki/react-sortable-list/master/example/screenshot.gif)
+![](https://raw.githubusercontent.com/shramee/react-sortable-items/master/example/screenshot.gif)
 
-react-sortable-list is a sortable list component using react and html5 drag and drop api.
+react-sortable-items is a sortable list component using react and html5 drag and drop api.
 
 ## Installation
 
-`yarn add react-sortable-list`
+`yarn add react-sortable-items`
 
 ## Use
 
 ```jsx
-import SortableList from 'react-sortable-list'
+import SortableItems from 'react-sortable-items'
 import ReactDOM from 'react-dom'
 import React, { Component } from 'react'
 
@@ -23,7 +23,7 @@ class TestComponent extends Component {
 
     return (
       <div>
-        <SortableList data={colors} />
+        <SortableItems data={colors} />
       </div>
     )
   }
