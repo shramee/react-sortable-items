@@ -70,15 +70,19 @@ export default class SortableItems extends Component {
 			return;
 		}
 		this.over = e.target;
-		let relY = e.clientY - this.over.offsetTop;
+		while ( ! this.over.classList.contains( 'sortable-items--item' ) ) {
+			if ( this.over.classList.contains( 'sortable-items--wrap' ) ) return;
+			this.over = this.over.parentNode;
+		}
+		let relY = this.dragged.offsetTop - this.over.offsetTop;
 		let height = this.over.offsetHeight / 2;
-		let parent = e.target.parentNode;
+		let parent = this.over.parentNode;
 		if ( relY > height ) {
 			this.nodePlacement = 'after';
-			parent.insertBefore( this.state.placeholder, e.target.nextElementSibling );
+			parent.insertBefore( this.state.placeholder, this.over.nextElementSibling );
 		} else if ( relY < height ) {
 			this.nodePlacement = 'before';
-			parent.insertBefore( this.state.placeholder, e.target );
+			parent.insertBefore( this.state.placeholder, this.over );
 		}
 	}
 
@@ -94,10 +98,12 @@ export default class SortableItems extends Component {
 			draggable  : "true",
 			onDragEnd  : this.dragEnd,
 			onDragStart: this.dragStart,
-			className  : 'sortable-items--item',
+			className  : '',
 			'data-ind'  : i,
 			...(this.props.itemProps || {})
 		};
+
+		props.className += ' sortable-items--item';
 
 		return <div {...props}>
 			{renderItem( item )}
@@ -109,9 +115,11 @@ export default class SortableItems extends Component {
 		const listItems = data.map( ( item, i ) => this.renderItem( item, i ) );
 		const props = {
 			onDragOver: this.dragOver,
-			className  : 'sortable-items--wrap',
+			className  : '',
 			...(this.props.wrapProps || {})
 		};
+
+		props.className += ' sortable-items--wrap';
 
 		return <div {...props}>{listItems}</div>;
 	}
