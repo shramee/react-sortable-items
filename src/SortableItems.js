@@ -14,13 +14,28 @@ export default class SortableItems extends Component {
 		let placeholder = document.createElement( 'div' );
 		placeholder.className = 'placeholder';
 		this.state = {
-			data: props.data,
+			data: [...props.data],
 			placeholder: placeholder
 		};
 
 		this.dragEnd = this.dragEnd.bind( this );
 		this.dragStart = this.dragStart.bind( this );
 		this.dragOver = this.dragOver.bind( this );
+	}
+
+	sortData( from, to ) {
+		let {data} = this.state;
+
+		data.splice( to, 0, data.splice( from, 1 )[0] );
+		let {onChange} = this.props;
+		if ( ! onChange ) {
+			onChange = items => null;
+		}
+
+		onChange( data );
+
+		this.setState( {data} );
+
 	}
 
 	/**
@@ -39,21 +54,13 @@ export default class SortableItems extends Component {
 	dragEnd( e ) {
 		this.dragged.style.display = 'block';
 		this.dragged.parentNode.removeChild( this.state.placeholder );
-		let data = this.state.data;
 		let from = Number( this.dragged.dataset.id );
 		let to = Number( this.over.dataset.id );
 		if ( from < to ) to --;
 		if ( this.nodePlacement == 'after' ) to ++;
-		data.splice( to, 0, data.splice( from, 1 )[0] );
 
-		let {onChange} = this.props;
-		if ( ! onChange ) {
-			onChange = items => null;
-		}
+		this.sortData( from, to );
 
-		onChange( data );
-
-		this.setState( {data: data} );
 	}
 
 	/**
