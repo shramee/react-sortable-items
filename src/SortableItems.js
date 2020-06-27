@@ -17,6 +17,10 @@ export default class SortableItems extends Component {
 			data: props.data,
 			placeholder: placeholder
 		};
+
+		this.dragEnd = this.dragEnd.bind( this );
+		this.dragStart = this.dragStart.bind( this );
+		this.dragOver = this.dragOver.bind( this );
 	}
 
 	/**
@@ -81,13 +85,16 @@ export default class SortableItems extends Component {
 			renderItem = item => item;
 		}
 
-		return <div
-			data-id={i}
-			key={i}
-			draggable="true"
-			onDragEnd={this.dragEnd.bind( this )}
-			onDragStart={this.dragStart.bind( this )}
-		>
+		const props = {
+			key        : i,
+			draggable  : "true",
+			onDragEnd  : this.dragEnd,
+			onDragStart: this.dragStart,
+			className  : 'sortable-items--item',
+			...(this.props.itemProps || {})
+		};
+
+		return <div {...props}>
 			{renderItem( item )}
 		</div>;
 	}
@@ -95,7 +102,12 @@ export default class SortableItems extends Component {
 	render() {
 		const {data} = this.state;
 		const listItems = data.map( ( item, i ) => this.renderItem( item, i ) );
+		const props = {
+			onDragOver: this.dragOver,
+			className  : 'sortable-items--wrap',
+			...(this.props.wrapProps || {})
+		};
 
-		return <div onDragOver={this.dragOver.bind( this )}>{listItems}</div>;
+		return <div {...props}>{listItems}</div>;
 	}
 }
