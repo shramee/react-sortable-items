@@ -7,7 +7,7 @@ import React, {Component} from 'react';
  * @param {function} renderItem Callback function to render item element from data item
  * @param {function} onChange Callback function called with newly ordered data
  **/
-export default class SortableItems extends Component {
+export default class SortableElements extends Component {
 
 	constructor( props ) {
 		super( props );

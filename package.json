@@ -1,11 +1,11 @@
 {
-  "name": "react-sortable-items",
-  "version": "1.1.1",
-  "description": "A minimalistic sortable input-like component.",
-  "main": "lib/SortableItems.js",
+  "name": "react-sortable-elements",
+  "version": "1.0.0",
+  "description": "A minimalistic input-like sortable component.",
+  "main": "lib/SortableElements.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/shramee/react-sortable-items.git"
+    "url": "https://github.com/shramee/react-sortable-elements.git"
   },
   "author": "Shramee <shramee.srivastav@gmail.com>",
   "license": "MIT",

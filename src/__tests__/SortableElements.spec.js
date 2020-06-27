@@ -14,47 +14,47 @@ global.document = window.document;
 import React from 'react'
 import renderer from 'react-test-renderer'
 import {shallow} from 'enzyme'
-import SortableItems from '../SortableItems'
+import SortableElements from '../SortableElements'
 
 const colors = ['Red', 'Green', 'Blue', 'Yellow', 'Black', 'White', 'Orange'];
 
-test( 'SortableItems render matches snapshot', () => {
+test( 'SortableElements render matches snapshot', () => {
 	const component = renderer.create(
-		<SortableItems data={colors}/>
+		<SortableElements data={colors}/>
 	);
 
 	let tree = component.toJSON();
 	expect( tree ).toMatchSnapshot();
 } );
 
-test( 'SortableItems renders the correct elements', () => {
+test( 'SortableElements renders the correct elements', () => {
 	const wrapper = shallow(
-		<SortableItems data={colors}/>
+		<SortableElements data={colors}/>
 	);
 
 	expect( wrapper.children( '.sortable-items--item' ).length ).toEqual( colors.length );
 	expect( wrapper.children( '.sortable-items--item' ).first().prop( 'draggable' ) ).toEqual( 'true' );
 } );
 
-test( 'SortableItems wrapProps className', () => {
+test( 'SortableElements wrapProps className', () => {
 	const wrapper = shallow(
-		<SortableItems data={colors} wrapProps={{className: 'my-sortable-stuff',}}/>
+		<SortableElements data={colors} wrapProps={{className: 'my-sortable-stuff',}}/>
 	);
 
 	expect( wrapper.hasClass( 'my-sortable-stuff' ) ).toEqual( true );
 } );
 
-test( 'SortableItems itemProps className', () => {
+test( 'SortableElements itemProps className', () => {
 	const wrapper = shallow(
-		<SortableItems data={colors} itemProps={{className: 'my-sortable-item',}}/>
+		<SortableElements data={colors} itemProps={{className: 'my-sortable-item',}}/>
 	);
 
 	expect( wrapper.children( '.my-sortable-item' ).length ).toEqual( colors.length );
 } );
 
-test( 'SortableItems data sorting', () => {
+test( 'SortableElements data sorting', () => {
 	const wrapper = shallow(
-		<SortableItems data={colors}/>
+		<SortableElements data={colors}/>
 	);
 
 	expect( wrapper.find( '.sortable-items--item' ).at( 0 ).text() ).toEqual( colors[0] );
@@ -71,7 +71,7 @@ test( 'SortableItems data sorting', () => {
 
 } );
 
-test( 'SortableItems data onChange callback', () => {
+test( 'SortableElements data onChange callback', () => {
 
 	let
 		delim = ', ',
@@ -81,7 +81,7 @@ test( 'SortableItems data onChange callback', () => {
 	const onChange = items => colorsList = items.join( delim );
 
 	const wrapper = shallow(
-		<SortableItems data={colors} onChange={onChange}/>
+		<SortableElements data={colors} onChange={onChange}/>
 	);
 
 	expect( colorsList ).toEqual( colorsArr.join( delim ) );
